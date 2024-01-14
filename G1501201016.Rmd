@@ -1,0 +1,169 @@
+---
+title   : "Survei Kompetensi MIPA - NTB"
+author  : Abdul Aziz Nurussadad / G1501201016
+date    : "`r Sys.Date()`"
+output  :
+  rmdformats::readthedown:
+    highlight: kate
+---
+
+```{r setup, include=FALSE}
+## Global options
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+***
+
+> Berikut ini adalah File Laporan, Tugas Akhir Semester Mata Kuliah STA551-Pemodelan Klasifikasi, Semester Ganjil 2021/2022
+
+***
+
+# A. Latar Belakang
+
+Sebuah Lembaga Swadaya Masyarakat yang bergerak di bidang pendidikan mengadakan sebuah survei di Provinsi Nusa Tenggara Barat.
+
+![](img/ntb.png)
+
+Pada survei ini, dilakukan pengukuran terhadap berbagai hal yang menjadi peubah **penjelas**, yaitu
+
+* Karakteristik Siswa
+  + Jenis Kelamin Siswa **(A)**
+  + Cara Belajar Siswa **(I)**
+  + Persetujuan Siswa terhadap pernyataan tertentu **(J)**
+  + Cita-cita **(G)**
+* Kondisi Sosial Ekonomi Siswa
+  + Tingkat Pendidikan Orangtua Siswa **(B)**
+  + Kondisi Rumah Tempat Tinggal **(C)**
+  + Barang-barang yang dimiliki siswa di rumah **(D)**
+* Pemanfaatan Waktu oleh Siswa
+  + Waktu yang digunakan untuk kegiatan tertentu **(F)**
+  + Pemanfaatan waktu di sekolah, saat bukan jam pelajaran **(H)**
+* Perhatian orang tua terhadap siswa
+  + Orangtua menanyakan hal tertentu pada siswa **(E)**
+  + Orangtua mengingatkan mengerjakan PR **(E)**
+  + Orangtua memeriksa PR **(E)**
+
+dengan menyandingkannya dengan Kategori Kompetensi Siswa (tinggi, rendah) dalam bidang Matematika dan IPA sebagai peubah **respon**, diharapkan didapatkan model yang dapat mengklasifikasikan siswa selaku peserta didik dengan apa yang diukur melalui survei ini.
+
+Dari 4078 baris data yang diberikan,
+
+* 3000 baris data pertama, berisi peubah penjelas dan peubah respon. Data ini akan digunakan untuk memperoleh model klasifikasi terbaik
+  + 70% sebagai data latih
+  + 30% sebagai data uji
+* 1078 baris data selanjutnya, hanya berisi peubah penjelas saja, yang digunakan untuk memperoleh hasil prediksi amatan.
+
+# B Metodologi
+
+Dalam melakukan analisis terhadap Data Survei Kompetensi MIPA, dilakukan dengan beberapa langkah yaitu :
+
+* Penyiapan Data
+* Eksplorasi dan Visualisasi Data
+* Pemodelan
+* Evaluasi Model
+
+
+Berikut akan dibahas mengenai masing-masing langkah tersebut.
+
+## B.1 Penyiapan Data
+
+Penyiapan Data dilakukan untuk dua langkah yaitu _Data Cleaning_ dan _Data Transformation_, sehingga mudah untuk dilakukan analisis lebih lanjut.
+
+### Data Cleaning
+
+Pembersihan Data adalah proses untuk memperbaiki, menghapus data yang salah (termasuk salah label), rusak, salah format, duplikasi atau tidak lengkap dalam suatu dataset. Jika data tidak benar, kesimpulan yang didapat dari suatu algoritma menjadi tidak dapat diandalkan walaupun mungkin terlihat benar. Bisa juga, algoritma pembelajaran mesin atau analisis statistika yang hendak digunakan tidak bisa dijalankan. Tidak ada konsep mutlak dari proses pembersihan data karena prosesnya akan bervariasi antar kumpulan data.
+
+### Data Transformation
+
+Transformasi data adalah proses mengubah data dari satu format atau struktur ke format lain. Proses transformasi juga dapat disebut sebagai data wrangling, atau data munging, bentuk data "mentah" ke format lain untuk penyimpanan dan memudahkan analisis.
+
+
+## B.2 Eksplorasi dan Visualisasi Data
+
+Eksplorasi data adalah langkah awal dalam suatu analisis data, dimana data diungkap pola awalnya, karakteristik dan poin utama. Berbagai metode visualisasi data berbasis grafik biasa digunakan, untuk menampilkan ukuran pemusatan (mean, median, modus, dan lain-lain) maupun ukuran penyebaran (jangkauan, deviasi, jangkauan antar kuartil, dan lain-lain) (Agresti dan Franklin, 2013). Proses ini tidak dimaksudkan untuk mengungkapkan setiap informasi yang terdapat pada data, tetapi lebih untuk membantu memberi gambaran tentang tren penting dan poin utama untuk dipelajari secara lebih rinci.
+
+
+## B.3 Algoritma Pemodelan
+
+Pemodelan Klasifikasi yang dilakukan untuk Data Survei Kompetensi MIPA ini adalah 
+
+* Regresi Logistik
+* k-Nearest Neighbour
+* Decision Tree
+* Random Forest
+* Gradient Boosting Machine
+
+### B.3.1 Regresi Logistik
+
+Regresi Logsitik adalah
+
+### B.3.2 k-Nearest Neighbour
+
+Nanti cari
+
+### B.3.3 Decision Tree
+
+Nanti cari
+
+### B.3.4 Random Forest
+
+Pakai Materi Kolokium
+
+### B.3.5 Gradient Boosting Machine
+
+Pakai Materi Kolokium
+
+## B.4 Evaluasi Model
+
+Setelah dilakukan pemodelan, maka dalam melakukan evaluasi,  model digunakan untuk memprediksi data testing (30% data), dan kemudian dibandingkan antara hasil prediksi dan aktual, sehingga bisa didapat  _Confusion Matrix_, sebagai berikut, 
+
+![](img/confusion.png)
+
+Terdapat tiga ukuran kebaikan model yang digunakan pada Pemodelan ini, yaitu
+
+**Akurasi**
+
+$$Akurasi = \frac{TP+TN}{TP+FN+FP+TN}$$
+
+**Sensitivitas**
+
+$$Sensitivitas = \frac{TP}{TP+FN}$$
+
+**Specificitas**
+
+$$Specificitas = \frac{TN}{FP+TN}$$
+
+# C Hasil
+
+## C.1 Penyiapan Data
+
+### Mengubah nama Peubah
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+library(readxl)
+angka <- read_excel("data/cleannumber.xlsx")
+mentah <- read_excel("data/data tugas pemodelan klasifikasi 2021 2022 untuk mahasiswa.xlsx")
+kolom <- cbind.data.frame(semula = colnames(mentah),menjadi = colnames(angka))
+
+
+library(dplyr)
+library(knitr)
+library(kableExtra)
+kolom %>%
+  kable("html") %>%
+  kable_styling(font_size = 14) %>%
+   kable_material(c("striped", "hover"), full_width = F)
+```
+
+## C.2 Eksplorasi dan Visualisasi Data
+
+Proses Eksplorasi
+
+## C.3 Pemodelan
+
+# D Kesimpulan
+
+# Referensi
+
+Agresti,A.,Franklin,C.A.(2013).Statistics: The Art and Science of Learning from Data.United Kingdom:Pearson.
+
+Guide To Data Cleaning: Definition, Benefits, Components, And How To Clean Your Data. https://www.tableau.com/learn/articles/what-is-data-cleaning
